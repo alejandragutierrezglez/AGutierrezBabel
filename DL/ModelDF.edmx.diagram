@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="f6909d5482074e8a94b1450314b25abb" Name="Diagram1">
+        <EntityTypeShape EntityType="AGutierrezBABELModel.Cliente" Width="1.5" PointX="0.75" PointY="7" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGutierrezBABELModel.ClientesPlane" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGutierrezBABELModel.Cobertura" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGutierrezBABELModel.Plane" Width="1.5" PointX="0.75" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AGutierrezBABELModel.PlanesCobertura" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <AssociationConnector Association="AGutierrezBABELModel.FK__ClientesP__IdCli__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="AGutierrezBABELModel.FK__ClientesP__Plane__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="AGutierrezBABELModel.FK__PlanesCob__IdCob__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="AGutierrezBABELModel.FK__PlanesCob__IdPla__4AB81AF0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

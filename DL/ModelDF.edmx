@@ -1,0 +1,362 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="AGutierrezBABELModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Clientes">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ClientesPlanes">
+          <Key>
+            <PropertyRef Name="IdClientesPlanes" />
+          </Key>
+          <Property Name="IdClientesPlanes" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdCliente" Type="int" />
+          <Property Name="Planes" Type="int" />
+        </EntityType>
+        <EntityType Name="Coberturas">
+          <Key>
+            <PropertyRef Name="IdCobertura" />
+          </Key>
+          <Property Name="IdCobertura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Planes">
+          <Key>
+            <PropertyRef Name="IdPlan" />
+          </Key>
+          <Property Name="IdPlan" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="100" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PlanesCoberturas">
+          <Key>
+            <PropertyRef Name="IdPlanesCoberturas" />
+          </Key>
+          <Property Name="IdPlanesCoberturas" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPlan" Type="int" />
+          <Property Name="IdCobertura" Type="int" />
+        </EntityType>
+        <Association Name="FK__ClientesP__IdCli__46E78A0C">
+          <End Role="Clientes" Type="Self.Clientes" Multiplicity="0..1" />
+          <End Role="ClientesPlanes" Type="Self.ClientesPlanes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="ClientesPlanes">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientesP__Plane__47DBAE45">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="ClientesPlanes" Type="Self.ClientesPlanes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="ClientesPlanes">
+              <PropertyRef Name="Planes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlanesCob__IdCob__4BAC3F29">
+          <End Role="Coberturas" Type="Self.Coberturas" Multiplicity="0..1" />
+          <End Role="PlanesCoberturas" Type="Self.PlanesCoberturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coberturas">
+              <PropertyRef Name="IdCobertura" />
+            </Principal>
+            <Dependent Role="PlanesCoberturas">
+              <PropertyRef Name="IdCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlanesCob__IdPla__4AB81AF0">
+          <End Role="Planes" Type="Self.Planes" Multiplicity="0..1" />
+          <End Role="PlanesCoberturas" Type="Self.PlanesCoberturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="PlanesCoberturas">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="ClienteAdd" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ClienteDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ClienteGetAll" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="ClienteGetById" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+        </Function>
+        <Function Name="ClienteUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="IdCliente" Type="int" Mode="In" />
+          <Parameter Name="Nombre" Type="varchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="AGutierrezBABELModelStoreContainer">
+          <EntitySet Name="Clientes" EntityType="Self.Clientes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ClientesPlanes" EntityType="Self.ClientesPlanes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Coberturas" EntityType="Self.Coberturas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PlanesCoberturas" EntityType="Self.PlanesCoberturas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__ClientesP__IdCli__46E78A0C" Association="Self.FK__ClientesP__IdCli__46E78A0C">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClientesPlanes" EntitySet="ClientesPlanes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientesP__Plane__47DBAE45" Association="Self.FK__ClientesP__Plane__47DBAE45">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="ClientesPlanes" EntitySet="ClientesPlanes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlanesCob__IdCob__4BAC3F29" Association="Self.FK__PlanesCob__IdCob__4BAC3F29">
+            <End Role="Coberturas" EntitySet="Coberturas" />
+            <End Role="PlanesCoberturas" EntitySet="PlanesCoberturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlanesCob__IdPla__4AB81AF0" Association="Self.FK__PlanesCob__IdPla__4AB81AF0">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="PlanesCoberturas" EntitySet="PlanesCoberturas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AGutierrezBABELModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Cliente">
+          <Key>
+            <PropertyRef Name="IdCliente" />
+          </Key>
+          <Property Name="IdCliente" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClientesPlanes" Relationship="Self.FK__ClientesP__IdCli__46E78A0C" FromRole="Clientes" ToRole="ClientesPlanes" />
+        </EntityType>
+        <EntityType Name="ClientesPlane">
+          <Key>
+            <PropertyRef Name="IdClientesPlanes" />
+          </Key>
+          <Property Name="IdClientesPlanes" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdCliente" Type="Int32" />
+          <Property Name="Planes" Type="Int32" />
+          <NavigationProperty Name="Cliente" Relationship="Self.FK__ClientesP__IdCli__46E78A0C" FromRole="ClientesPlanes" ToRole="Clientes" />
+          <NavigationProperty Name="Plane" Relationship="Self.FK__ClientesP__Plane__47DBAE45" FromRole="ClientesPlanes" ToRole="Planes" />
+        </EntityType>
+        <EntityType Name="Cobertura">
+          <Key>
+            <PropertyRef Name="IdCobertura" />
+          </Key>
+          <Property Name="IdCobertura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PlanesCoberturas" Relationship="Self.FK__PlanesCob__IdCob__4BAC3F29" FromRole="Coberturas" ToRole="PlanesCoberturas" />
+        </EntityType>
+        <EntityType Name="Plane">
+          <Key>
+            <PropertyRef Name="IdPlan" />
+          </Key>
+          <Property Name="IdPlan" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="ClientesPlanes" Relationship="Self.FK__ClientesP__Plane__47DBAE45" FromRole="Planes" ToRole="ClientesPlanes" />
+          <NavigationProperty Name="PlanesCoberturas" Relationship="Self.FK__PlanesCob__IdPla__4AB81AF0" FromRole="Planes" ToRole="PlanesCoberturas" />
+        </EntityType>
+        <EntityType Name="PlanesCobertura">
+          <Key>
+            <PropertyRef Name="IdPlanesCoberturas" />
+          </Key>
+          <Property Name="IdPlanesCoberturas" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPlan" Type="Int32" />
+          <Property Name="IdCobertura" Type="Int32" />
+          <NavigationProperty Name="Cobertura" Relationship="Self.FK__PlanesCob__IdCob__4BAC3F29" FromRole="PlanesCoberturas" ToRole="Coberturas" />
+          <NavigationProperty Name="Plane" Relationship="Self.FK__PlanesCob__IdPla__4AB81AF0" FromRole="PlanesCoberturas" ToRole="Planes" />
+        </EntityType>
+        <Association Name="FK__ClientesP__IdCli__46E78A0C">
+          <End Role="Clientes" Type="Self.Cliente" Multiplicity="0..1" />
+          <End Role="ClientesPlanes" Type="Self.ClientesPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clientes">
+              <PropertyRef Name="IdCliente" />
+            </Principal>
+            <Dependent Role="ClientesPlanes">
+              <PropertyRef Name="IdCliente" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__ClientesP__Plane__47DBAE45">
+          <End Role="Planes" Type="Self.Plane" Multiplicity="0..1" />
+          <End Role="ClientesPlanes" Type="Self.ClientesPlane" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="ClientesPlanes">
+              <PropertyRef Name="Planes" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlanesCob__IdCob__4BAC3F29">
+          <End Role="Coberturas" Type="Self.Cobertura" Multiplicity="0..1" />
+          <End Role="PlanesCoberturas" Type="Self.PlanesCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coberturas">
+              <PropertyRef Name="IdCobertura" />
+            </Principal>
+            <Dependent Role="PlanesCoberturas">
+              <PropertyRef Name="IdCobertura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PlanesCob__IdPla__4AB81AF0">
+          <End Role="Planes" Type="Self.Plane" Multiplicity="0..1" />
+          <End Role="PlanesCoberturas" Type="Self.PlanesCobertura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Planes">
+              <PropertyRef Name="IdPlan" />
+            </Principal>
+            <Dependent Role="PlanesCoberturas">
+              <PropertyRef Name="IdPlan" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AGutierrezBABELEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Clientes" EntityType="Self.Cliente" />
+          <EntitySet Name="ClientesPlanes" EntityType="Self.ClientesPlane" />
+          <EntitySet Name="Coberturas" EntityType="Self.Cobertura" />
+          <EntitySet Name="Planes" EntityType="Self.Plane" />
+          <EntitySet Name="PlanesCoberturas" EntityType="Self.PlanesCobertura" />
+          <AssociationSet Name="FK__ClientesP__IdCli__46E78A0C" Association="Self.FK__ClientesP__IdCli__46E78A0C">
+            <End Role="Clientes" EntitySet="Clientes" />
+            <End Role="ClientesPlanes" EntitySet="ClientesPlanes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__ClientesP__Plane__47DBAE45" Association="Self.FK__ClientesP__Plane__47DBAE45">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="ClientesPlanes" EntitySet="ClientesPlanes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlanesCob__IdCob__4BAC3F29" Association="Self.FK__PlanesCob__IdCob__4BAC3F29">
+            <End Role="Coberturas" EntitySet="Coberturas" />
+            <End Role="PlanesCoberturas" EntitySet="PlanesCoberturas" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PlanesCob__IdPla__4AB81AF0" Association="Self.FK__PlanesCob__IdPla__4AB81AF0">
+            <End Role="Planes" EntitySet="Planes" />
+            <End Role="PlanesCoberturas" EntitySet="PlanesCoberturas" />
+          </AssociationSet>
+          <FunctionImport Name="ClienteDelete">
+          <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ClienteGetAll" ReturnType="Collection(AGutierrezBABELModel.ClienteGetAll_Result)" />
+          <FunctionImport Name="ClienteGetById" ReturnType="Collection(AGutierrezBABELModel.ClienteGetById_Result)">
+          <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="ClienteUpdate">
+            <Parameter Name="IdCliente" Mode="In" Type="Int32" />
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ClienteAdd">
+            <Parameter Name="Nombre" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="ClienteGetAll_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="ClienteGetById_Result">
+          <Property Type="Int32" Name="IdCliente" Nullable="false" />
+          <Property Type="String" Name="Nombre" Nullable="false" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="AGutierrezBABELModelStoreContainer" CdmEntityContainer="AGutierrezBABELEntities">
+          <EntitySetMapping Name="Clientes">
+            <EntityTypeMapping TypeName="AGutierrezBABELModel.Cliente">
+              <MappingFragment StoreEntitySet="Clientes">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientesPlanes">
+            <EntityTypeMapping TypeName="AGutierrezBABELModel.ClientesPlane">
+              <MappingFragment StoreEntitySet="ClientesPlanes">
+                <ScalarProperty Name="IdClientesPlanes" ColumnName="IdClientesPlanes" />
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Planes" ColumnName="Planes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Coberturas">
+            <EntityTypeMapping TypeName="AGutierrezBABELModel.Cobertura">
+              <MappingFragment StoreEntitySet="Coberturas">
+                <ScalarProperty Name="IdCobertura" ColumnName="IdCobertura" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Planes">
+            <EntityTypeMapping TypeName="AGutierrezBABELModel.Plane">
+              <MappingFragment StoreEntitySet="Planes">
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PlanesCoberturas">
+            <EntityTypeMapping TypeName="AGutierrezBABELModel.PlanesCobertura">
+              <MappingFragment StoreEntitySet="PlanesCoberturas">
+                <ScalarProperty Name="IdPlanesCoberturas" ColumnName="IdPlanesCoberturas" />
+                <ScalarProperty Name="IdPlan" ColumnName="IdPlan" />
+                <ScalarProperty Name="IdCobertura" ColumnName="IdCobertura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="ClienteDelete" FunctionName="AGutierrezBABELModel.Store.ClienteDelete" />
+          <FunctionImportMapping FunctionImportName="ClienteGetAll" FunctionName="AGutierrezBABELModel.Store.ClienteGetAll">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AGutierrezBABELModel.ClienteGetAll_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ClienteGetById" FunctionName="AGutierrezBABELModel.Store.ClienteGetById">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="AGutierrezBABELModel.ClienteGetById_Result">
+                <ScalarProperty Name="IdCliente" ColumnName="IdCliente" />
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="ClienteUpdate" FunctionName="AGutierrezBABELModel.Store.ClienteUpdate" />
+          <FunctionImportMapping FunctionImportName="ClienteAdd" FunctionName="AGutierrezBABELModel.Store.ClienteAdd" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

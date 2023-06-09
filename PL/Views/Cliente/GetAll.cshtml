@@ -1,0 +1,48 @@
+﻿@model ML.Cliente
+@{
+    ViewBag.Title = "GetAll";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script type="text/javascript" src="~/Scripts/Cliente/Cliente.js"></script>
+
+<div class="container">
+    <div class="row">
+        <div class="=col-md-12">
+            <h1 style="text-align:center; color:brown; font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif">Clientes</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1 ">
+            @Html.ActionLink("Nuevo Cliente", "Form", "Cliente", htmlAttributes: new { @class = "btn btn-success" })
+        </div>
+        <br> <br />
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <table id="tblClientes" class="table table-bordered table-responsive">
+                <thead class="thead-dark">
+                    <tr>
+                        <td>Editar</td>
+                        <td>IdCliente</td>
+                        <td>Nombre</td>
+                        <td>Eliminar</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (ML.Cliente cliente in Model.Clientes)
+                    {
+                        <tr>
+                            <td class="text-center"><a class="btn btn-warning glyphicon glyphicon-edit" href="@Url.Action("Form", "Cliente", new { IdCliente = cliente.IdCliente })"></a></td>
+                            <td>@cliente.IdCliente</td>
+                            <td>@cliente.Nombre</td>
+                            <td class="text-center"><a class="btn btn-danger glyphicon glyphicon-erase" href="@Url.Action("Delete", "Cliente", new { IdCliente = cliente.IdCliente})" onclick="return confirm('¿Estas seguro que deseas eliminar este registro?');"></a></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
